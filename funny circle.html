@@ -59,19 +59,9 @@
                     ctx.fill();
                 } else {
                     x=0;
-                    ctx.beginPath();
-                    ctx.arc(circle.x, circle.y, circle.radius+1, 0, 2 * Math.PI);
-                    ctx.fillStyle="white";
-                    ctx.fill();
-                    x+=5;
-                    circle.setX(x);
-                    ctx.beginPath();
-                    ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
-                    ctx.fillStyle=color;
-                    ctx.fill();
                 }
             }
-            var t=setInterval(move,10);
+            var t=setInterval(move,20);
         }
         function createMultipleCircle(){
             for(var i = 0; i < 30; i++){
