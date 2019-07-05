@@ -3,13 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        .canvas{
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-    </style>
 </head>
 <body>
 
@@ -19,6 +12,16 @@
             this.x = x;
             this.y = y;
             this.radius = radius;
+
+            this.setX = function (x) {
+                this.x = x;
+            };
+            this.setY = function (y) {
+                this.y = y;
+            };
+            this.setRadius = function (radius) {
+                this.radius = radius;
+            };
         }
         function getRandomHex(){
             return Math.floor(Math.random()*255);
@@ -35,14 +38,41 @@
             var radius = Math.floor(Math.random() * 80+1);
             var color = getRandomColor();
             var x = Math.random() * window.innerWidth;
+            var x1=x;
             var y = Math.random() * window.innerHeight;
             var circle= new Circle(x, y, radius);
             ctx.beginPath();
             ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
             ctx.fillStyle=color;
             ctx.fill();
+            function move() {
+                if (x<window.innerWidth){
+                    ctx.beginPath();
+                    ctx.arc(circle.x, circle.y, circle.radius+1, 0, 2 * Math.PI);
+                    ctx.fillStyle="white";
+                    ctx.fill();
+                    x+=5;
+                    circle.setX(x);
+                    ctx.beginPath();
+                    ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+                    ctx.fillStyle=color;
+                    ctx.fill();
+                } else {
+                    x=0;
+                    ctx.beginPath();
+                    ctx.arc(circle.x, circle.y, circle.radius+1, 0, 2 * Math.PI);
+                    ctx.fillStyle="white";
+                    ctx.fill();
+                    x+=5;
+                    circle.setX(x);
+                    ctx.beginPath();
+                    ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+                    ctx.fillStyle=color;
+                    ctx.fill();
+                }
+            }
+            var t=setInterval(move,10);
         }
-
         function createMultipleCircle(){
             for(var i = 0; i < 30; i++){
                 createCircle();
